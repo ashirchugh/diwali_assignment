@@ -1,11 +1,12 @@
 import pandas as pd
 
-data = {'Size': ['Small', 'Medium', 'Large', 'Medium', 'Small', 'Large']}
-df = pd.DataFrame(data)
+data = pd.read_csv("data.csv")
 
-order = ['Small', 'Medium', 'Large']
-mapping = {value: index + 1 for index, value in enumerate(order)}
+gender_map = {"Male": 1, "Female": 0}
+data["Gender"] = data["Gender"].map(gender_map)
 
-df['Size_Encoded'] = [mapping[item] for item in df['Size']]
+edu_map = {"High School": 1, "Graduate": 2, "Postgraduate": 3}
+data["Education"] = data["Education"].map(edu_map)
 
-print(df)
+print("After ordinal encoding:")
+print(data.head())

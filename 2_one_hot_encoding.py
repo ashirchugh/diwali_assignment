@@ -1,19 +1,8 @@
 import pandas as pd
-import numpy as np
 
-data = {'Color': ['Red', 'Blue', 'Green', 'Blue', 'Red']}
-df = pd.DataFrame(data)
+data = pd.read_csv("data.csv")
 
-categories = df['Color'].unique()
-encoded = np.zeros((len(df), len(categories)), dtype=int)
+encoded = pd.get_dummies(data, columns=["City", "Occupation"])
 
-for i, cat in enumerate(categories):
-    for j, val in enumerate(df['Color']):
-        if val == cat:
-            encoded[j][i] = 1
-
-for i, cat in enumerate(categories):
-    df[cat] = encoded[:, i]
-
-print(df)
-
+print("After one hot encoding:")
+print(encoded.head())
