@@ -1,8 +1,12 @@
 import pandas as pd
+import numpy as np
 
-data = pd.read_csv("data.csv")
+data = {'City': ['Delhi', 'Mumbai', 'Kolkata', 'Delhi', 'Chennai']}
+df = pd.DataFrame(data)
 
-encoded = pd.get_dummies(data, columns=["City", "Occupation"])
+cities = df['City'].unique()
 
-print("After one hot encoding:")
-print(encoded.head())
+for city in cities:
+    df[city] = [1 if x == city else 0 for x in df['City']]
+
+print(df)
